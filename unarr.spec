@@ -15,14 +15,9 @@ Source0:		https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{s
 Source1:	https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
 #Source1:		CMakeLists.txt
 
-BuildRequires: 	cmake
-%if 0%{?suse_version}
-BuildRequires: 	zlib-devel
-BuildRequires: 	libbz2-devel
-%else
-BuildRequires: 	zlib-devel
+BuildRequires: 	cmake(ZLIB)
+BuildRequires: 	pkgconfig(zlib)
 BuildRequires: 	bzip2-devel
-%endif
 
 %description
 A lightweight decompression library with support for rar, tar and zip
@@ -88,7 +83,3 @@ find %{buildroot} -name '*.a' -exec rm -f {} ';'
 %files devel
 %{_includedir}/*
 %{_libdir}/%{name}.so
-
-%changelog
-* Fri Oct 23 2015 herr_k
-- 
