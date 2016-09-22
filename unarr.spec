@@ -4,22 +4,16 @@
 Name:           	libunarr
 Version:		1.0      
 Release:          git%{shortcommit0}%{?dist}
-%if %{defined suse_version}
 Group:            Development/Libraries/C and C++
-%endif
 
 Summary:        A decompression library
 
-%if 0%{?suse_version}
 License:      	LGPL-2.0
-%else
-License:      	LGPLv2+	
-%endif
 
 URL:            	https://github.com/zeniko/unarr
 Source0:		https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-#Source1:	https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
-Source1:		CMakeLists.txt
+Source1:	https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
+#Source1:		CMakeLists.txt
 
 BuildRequires: 	cmake
 %if 0%{?suse_version}
