@@ -57,21 +57,13 @@ make install DESTDIR=%{buildroot}
 
 find %{buildroot} -name '*.a' -exec rm -f {} ';'
 
-%if 0%{?suse_version}
-%post -n%{name}1 -p /sbin/ldconfig
-%postun -n%{name}1 -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 
-%files -n %{name}1
-%{_libdir}/*.so.1*
+%files -n %{libname}
+#/%{_lib}/libunarr-%{api}.so.%{major}*
+/%{_lib}/*.so.%{major}*
 
-%else
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
-%files
-%{_libdir}/%{name}.so.1*
-%endif
-
-%files devel
+%files -n %{devname}
 %{_includedir}/*
 %{_libdir}/%{name}.so
