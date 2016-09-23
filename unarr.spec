@@ -4,13 +4,13 @@
 %define devname %mklibname -d unarr %{api}
 
 Summary:        A decompression library
-Name:		        libunarr
-Version:	      1.0.0
-Release:	      1
-License:	      LGPLv2+
-Group:	        Development/Libraries/C and C++
+Name:           libunarr
+Version:        1.0.0
+Release:        1
+License:        LGPLv2+
+Group:          Development/Libraries/C and C++
 
-URL:				https://github.com/zeniko/unarr
+URL:			https://github.com/zeniko/unarr
 Source0:		https://github.com/selmf/unarr/archive/master.zip
 #Source0:		https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 #Source1:		https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
@@ -35,8 +35,8 @@ archives
 %package -n %{devname}
 Summary:        Development files for %{name}
 Group:          Development/Libraries/C and C++
-Requires:	      %{libname} = %{version}-%{release}
-Provides:	      %{name}-devel = %{version}-%{release}
+Requires:       %{libname} = %{version}-%{release}
+Provides:       %{name}-devel = %{version}-%{release}
 
 %description -n %{devname}
 The %{name}-devel package contains libraries and header files for
