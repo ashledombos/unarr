@@ -3,11 +3,6 @@
 %define libname	%mklibname unarr %{api} %{major}
 %define devname %mklibname -d unarr %{api}
 
-Name:           	libunarr
-Version:      		1.0      
-Release:          git%{shortcommit0}%{?dist}
-Group:            Development/Libraries/C and C++
-
 Summary:        A decompression library
 Name:		        libunarr
 Version:	      1.0.0
@@ -16,8 +11,9 @@ License:	      LGPLv2+
 Group:	        Development/Libraries/C and C++
 
 URL:            https://github.com/zeniko/unarr
-Source0:		    https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1:        https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
+
+#Source0:		    https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+#Source1:        https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
 #Source1:       CMakeLists.txt
 
 BuildRequires: 	cmake(ZLIB)
