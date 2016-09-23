@@ -1,8 +1,10 @@
-%global commit0 d1be8c43a82a4320306c8e835a86fdb7b2574ca7
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%define api	1.0
+%define major	0
+%define libname	%mklibname unarr %{api} %{major}
+%define devname %mklibname -d unarr %{api}
 
 Name:           	libunarr
-Version:		1.0      
+Version:      		1.0      
 Release:          git%{shortcommit0}%{?dist}
 Group:            Development/Libraries/C and C++
 
