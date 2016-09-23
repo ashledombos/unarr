@@ -10,11 +10,11 @@ Release:	      1
 License:	      LGPLv2+
 Group:	        Development/Libraries/C and C++
 
-URL:						https://github.com/zeniko/unarr
-Source0:				https://github.com/selmf/unarr/archive/master.zip
-#Source0:				https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-#Source1:				https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
-#Source1:				CMakeLists.txt
+URL:				https://github.com/zeniko/unarr
+Source0:		https://github.com/selmf/unarr/archive/master.zip
+#Source0:		https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+#Source1:		https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
+#Source1:		CMakeLists.txt
 
 BuildRequires: 	cmake(ZLIB)
 BuildRequires: 	pkgconfig(zlib)
