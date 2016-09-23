@@ -9,13 +9,16 @@ Release:          git%{shortcommit0}%{?dist}
 Group:            Development/Libraries/C and C++
 
 Summary:        A decompression library
+Name:		        libunarr
+Version:	      1.0.0
+Release:	      1
+License:	      LGPLv2+
+Group:	        Development/Libraries/C and C++
 
-License:      	LGPL-2.0
-
-URL:            	https://github.com/zeniko/unarr
-Source0:		https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1:	https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
-#Source1:		CMakeLists.txt
+URL:            https://github.com/zeniko/unarr
+Source0:		    https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1:        https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
+#Source1:       CMakeLists.txt
 
 BuildRequires: 	cmake(ZLIB)
 BuildRequires: 	pkgconfig(zlib)
@@ -25,32 +28,23 @@ BuildRequires: 	bzip2-devel
 A lightweight decompression library with support for rar, tar and zip
 archives
 
-%if 0%{?suse_version}
-%package -n %{name}1
-Group:            Development/Libraries/C and C++
+%package -n %{libname}
+Group:          Development/Libraries/C and C++
 Summary:        A decompression library
 
-%description -n %{name}1
+%description -n %{libname}
 A lightweight decompression library with support for rar, tar and zip
 archives
 
-%package       devel
-Group:            Development/Libraries/C and C++
-Summary:        Development files for %{name}1
-Requires:       %{name}1%{?_isa} = %{version}-%{release}
-
-%description    devel
-The %{name}-devel package contains libraries and header files for
-developing applications that use %{name}.
-
-%else
-%package       devel
+%package -n %{devname}
 Summary:        Development files for %{name}
-Requires:       %{name}%{?_isa} = %{version}-%{release}
-%description    devel
+Group:          Development/Libraries/C and C++
+Requires:	      %{libname} = %{version}-%{release}
+Provides:	      %{name}-devel = %{version}-%{release}
+
+%description -n %{devname}
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
-%endif
 
 %prep
 %setup -qn unarr-%{commit0}
@@ -64,7 +58,6 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=%{buildroot}
 
-find %{buildroot} -name '*.la' -exec rm -f {} ';'
 find %{buildroot} -name '*.a' -exec rm -f {} ';'
 
 %if 0%{?suse_version}
