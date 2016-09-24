@@ -1,20 +1,20 @@
-%define api	1.0
-%define major	0
-%define libname	%mklibname unarr %{api} %{major}
-%define devname %mklibname -d unarr %{api}
+%define major	1
+%define libname	%mklibname unarr %{major}
+%define devname %mklibname -d unarr
+%define date	20160923
 
-Summary:        A decompression library
-Name:           libunarr
-Version:        1.0.0
-Release:        1
-License:        LGPLv2+
-Group:          Development/Libraries/C and C++
+Name:		unarr
+Version:	0
+Release:	1.%{date}
+Group:		Development/C
+Summary:	A decompression library
+License:	LGPLv2+
 
 URL:            https://github.com/zeniko/unarr
-Source0:        https://github.com/selmf/unarr/archive/master.zip
-#Source0:		https://github.com/zeniko/unarr/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-#Source1:		https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
-#Source1:		CMakeLists.txt
+# git clone https://github.com/zeniko/unarr.git
+# git archive --format=tar --prefix unarr-0-$(date +%Y%m%d)/ HEAD | xz -vf > unarr-0-$(date +%Y%m%d).tar.xz
+Source0:	%{name}-%{version}-%{date}.tar.xz
+Source1:        https://raw.githubusercontent.com/selmf/unarr/master/CMakeLists.txt
 
 BuildRequires: 	cmake(ZLIB)
 BuildRequires: 	pkgconfig(zlib)
@@ -25,7 +25,6 @@ A lightweight decompression library with support for rar, tar and zip
 archives
 
 %package -n %{libname}
-Group:          Development/Libraries/C and C++
 Summary:        A decompression library
 
 %description -n %{libname}
@@ -33,37 +32,30 @@ A lightweight decompression library with support for rar, tar and zip
 archives
 
 %package -n %{devname}
-Summary:        Development files for %{name}
-Group:          Development/Libraries/C and C++
-Requires:       %{libname} = %{version}-%{release}
-Provides:       %{name}-devel = %{version}-%{release}
+Summary:	Development files for %{name}
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{devname}
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %prep
-#%setup -qn unarr-%{commit0}
-#cp -p %SOURCE1 .
-%setup -q
+%setup -qn %{name}-%{version}-%{date}
+cp -p %SOURCE1 .
+sed -i s'!DESTINATION lib!DESTINATION %_lib!g' CMakeLists.txt 
 
 %build
 %cmake 
-#-DCMAKE_INSTALL_PREFIX=/usr -DLIB_SUFFIX=64
-make %{?_smp_mflags}
+%make
 
 %install
-make install DESTDIR=%{buildroot}
-
+%makeinstall_std -C build LIBDIR=%{_libdir}
 find %{buildroot} -name '*.a' -exec rm -f {} ';'
 
-%post -n %{libname} -p /sbin/ldconfig
-%postun -n %{libname} -p /sbin/ldconfig
-
 %files -n %{libname}
-#/%{_lib}/libunarr-%{api}.so.%{major}*
-/%{_lib}/*.so.%{major}*
+%{_libdir}/*.so.%{major}*
 
 %files -n %{devname}
 %{_includedir}/*
-%{_libdir}/%{name}.so
+%{_libdir}/lib%{name}.so
